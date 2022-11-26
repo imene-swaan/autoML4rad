@@ -47,8 +47,8 @@ tree.plot_tree(clf2,feature_names=['dims','counts'],filled=True)
 plt.subplot(1,3,3)
 tree.plot_tree(clf3,feature_names=['dims','counts'],filled=True)
 
-plt.savefig('results/pictures/test_data/tree.png')
-plt.savefig('results/pictures/test_data/tree.pdf')
+plt.savefig('results/week4/pictures/test_data/tree.png')
+plt.savefig('results/week4/pictures/test_data/tree.pdf')
 
 plt.show()
 
@@ -73,8 +73,8 @@ plt.yticks(np.linspace(0,19,5),np.round(np.exp(np.linspace(0,np.log(1000),5)),1)
 plt.xlabel('dims')
 plt.ylabel('counts')
 cbar=plt.colorbar()
-plt.savefig('results/pictures/test_data/estimators.png')
-plt.savefig('results/pictures/test_data/estimators.pdf')
+plt.savefig('results/week4/pictures/test_data/estimators.png')
+plt.savefig('results/week4/pictures/test_data/estimators.pdf')
 plt.show()
 
 
@@ -90,8 +90,8 @@ plt.yticks(np.linspace(0,19,5),np.round(np.exp(np.linspace(0,np.log(1000),5)),1)
 plt.xlabel('dims')
 plt.ylabel('counts')
 cbar=plt.colorbar()
-plt.savefig('results/pictures/test_data/contamination.png')
-plt.savefig('results/pictures/test_data/contamination.pdf')
+plt.savefig('results/week4/pictures/test_data/contamination.png')
+plt.savefig('results/week4/pictures/test_data/contamination.pdf')
 plt.show()
 
 
@@ -109,8 +109,8 @@ plt.yticks(np.linspace(0,19,5),np.round(np.exp(np.linspace(0,np.log(1000),5)),1)
 plt.xlabel('dims')
 plt.ylabel('counts')
 cbar=plt.colorbar()
-plt.savefig('results/pictures/test_data/samples.png')
-plt.savefig('results/pictures/test_data/samples.pdf')
+plt.savefig('results/week4/pictures/test_data/samples.png')
+plt.savefig('results/week4/pictures/test_data/samples.pdf')
 plt.show()
 
 print('done')
