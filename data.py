@@ -11,7 +11,7 @@ def make_json_ending(file):
     return file.split('/')[-1][:-4]+'.json'
 
 def load_hyperparameters(file):
-    with open("results/"+file,"r") as f:
+    with open("../results/week3/"+file,"r") as f:
         return json.load(f)
 
 def load_inputs(file):
@@ -36,5 +36,3 @@ for file in file_list:
 counts =np.array(n_samples)
 dims =np.array(n_features)
 hyperparameters={k:np.array(v) for k,v in hyperparameters.items()}
-
-print(list(hyperparameters.keys()))
