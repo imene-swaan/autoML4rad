@@ -53,17 +53,17 @@ for i in range(len(data)):
              'contamination': 'default',
              'max_samples': 'default'})
 
-    print('default parameters results.....')
+    print('default parameters results...................')
     print('auc_score: ', au)
 
     
     for j in range(40):
 
-        print('training with hyperparameters ', j)
+        print('training with hyperparameters ', j+1)
 
-        hy = {'n_estimators': hyperparameters['n_estimators'][j],
-         'contamination': hyperparameters['contamination'][j],
-         'max_samples': hyperparameters['max_samples'][j]
+        hy = {'n_estimators': int(hyperparameters['n_estimators'][j]),
+         'contamination': float(hyperparameters['contamination'][j]),
+         'max_samples': int(hyperparameters['max_samples'][j])
          }
         print(hy)
 
@@ -81,11 +81,13 @@ for i in range(len(data)):
     best_parameters = h[r.index(max(r))]
     print(best_parameters)
 
+    print('comparing with pyod params .....')
+    c = list(filter(lambda x: not x < r[0], r))
+    print(len(c), ' model params gave better results than pyod')
+
 
     print('saving..............')
-    with open('results/test/'+dataset_name[i]+'.json', 'w', encoding='utf-8') as f:
+    with open('../results/week4/'+dataset_name[i]+'.json', 'w', encoding='utf-8') as f:
         json.dump(best_parameters, f, ensure_ascii=False, indent=4)
     
     
-
-
