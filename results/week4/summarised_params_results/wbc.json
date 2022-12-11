@@ -1,0 +1,5 @@
+{
+    "n_estimators": "default",
+    "contamination": "default",
+    "max_samples": "default"
+}

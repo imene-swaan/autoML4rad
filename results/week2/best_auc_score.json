@@ -1,0 +1,15 @@
+{
+    "score": 0.9799199380165289,
+    "evaluation_cost": 5.3516294956207275,
+    "training_iteration": 0,
+    "config": {
+        "n_estimators": 668,
+        "max_samples": 163,
+        "contamination": 0.32
+    },
+    "config/n_estimators": 668,
+    "config/max_samples": 163,
+    "config/contamination": 0.32,
+    "experiment_tag": "exp",
+    "time_total_s": 5.352956295013428
+}

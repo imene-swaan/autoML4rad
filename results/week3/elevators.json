@@ -1,0 +1,5 @@
+{
+    "n_estimators": 405,
+    "contamination": 0.19,
+    "max_samples": 294
+}
