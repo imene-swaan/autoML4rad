@@ -1,5 +1,5 @@
 import numpy as np
-import main
+import DEAN
 from flaml import tune
 import time
 import json
@@ -17,11 +17,15 @@ if len(x_train0.shape)>2:
 
 
 def train_one(**hyper):
-    y_true,y_score = main.DEAN(**hyper)
+    model = DEAN.DEAN(**hyper)
+    y_true,y_score = model.fit(x_train0, y_train, x_test0, y_test)
 
     return roc_auc_score(y_true,y_score)
 
 def optimization(config: dict):
+
+    print('IM TRAINING \n------------------------\n------------------------\n------------------------\n------------------------\n------------------------\n------------------------\n------------------------\n------------------------\n------------------------\n------------------------')
+
     t0 = time.time()
     auc = train_one(**config)
     t1 = time.time()
@@ -30,13 +34,11 @@ def optimization(config: dict):
 
 #(index, bag, lr, depth, batch, rounds, pwr)
 
-hyperparameters = {'index': tune.randint(lower=0, upper=9), 
-                    'bag': tune.randint(lower =1, upper= x_train0.shape[1]),
-                    'lr': tune.uniform(lower = 0.01, upper= 0.05),
-                    'depth': tune.randint(lower = 1, upper = 5),
-                    'batch': tune.randint(lower= 50, upper = 500),
-                    'rounds': tune.randint(lower = 50, upper = 150),
-                    'pwr': tune.randint(lower = 0, upper = 2)
+hyperparameters = {
+                    'bag': tune.randint(lower =2, upper= x_train0.shape[1]),
+                    'lr': tune.uniform(lower = 0.02, upper= 0.05),
+                    'depth': tune.randint(lower = 1, upper = 3),
+                    'batch': tune.randint(lower= 100, upper = 150)
                     }
 
 
@@ -46,7 +48,7 @@ analysis = tune.run(
     config= hyperparameters,  # the search space defined
     metric="score",
     mode="max",  # the optimization mode, "min" or "max"
-    num_samples= 100,  # the maximal number of configs to try, -1 means infinite
+    num_samples= 100
     )
 
 
