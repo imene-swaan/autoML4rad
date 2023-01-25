@@ -38,7 +38,8 @@ hyperparameters = {
                     'bag': tune.randint(lower =2, upper= x_train0.shape[1]),
                     'lr': tune.uniform(lower = 0.02, upper= 0.05),
                     'depth': tune.randint(lower = 1, upper = 3),
-                    'batch': tune.randint(lower= 100, upper = 150)
+                    'batch': tune.randint(lower= 100, upper = 150),
+                    'rounds': tune.randint(lower= 20, upper = 50)
                     }
 
 
