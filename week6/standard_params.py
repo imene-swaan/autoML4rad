@@ -8,7 +8,7 @@ from loaddata import loaddata
 
 
 
-file_list = glob.glob(os.path.join('/global/datasets/', "*.npz"))
+file_list = glob.glob(os.path.join('/global/datasets/test/', "*.npz"))
 
 data = []
 dataset_name = []
