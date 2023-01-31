@@ -22,6 +22,7 @@ standard_results = {}
 
 for i in range(len(data)):
     print('dataset ', i+1, 'out of ', len(data), '.......................')
+    print('-'*1000)
     print('dataset name: ', dataset_name[i])
 
 
@@ -42,7 +43,7 @@ for i in range(len(data)):
     standard_results[dataset_name[i]] = au
 
 
-    print('default parameters results...................')
+    print('default parameters results for dataset: ', dataset_name[i])
     print('auc_score: ', au)
 
     
