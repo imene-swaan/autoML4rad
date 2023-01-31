@@ -5,12 +5,36 @@ import glob
 import os
 import DEAN
 from loaddata import loaddata
-from flaml import tune
-import time
 
 
 
-file_list = glob.glob(os.path.join('/global/datasets/', "*.npz"))
+f = open('../results/week5/parameters-results.json')
+h = json.load(f)
+
+par = ['bag','lr', 'depth', 'batch', 'rounds']
+
+hy = {}
+
+for p in par:
+    hy[p] = []
+
+for k,v in h.items():
+    for p in par:
+        hy[p].append(v['params'][p])
+
+
+
+avg_hyperparameters = {
+                    'bag': np.mean(hy['bag']),
+                    'lr': np.mean(hy['lr']),
+                    'depth': np.mean(hy['depth']),
+                    'batch': np.mean(hy['batch']),
+                    'rounds': np.mean(hy['rounds'])
+                    } #get average and median from _params.py
+
+
+
+file_list = glob.glob(os.path.join('/global/datasets/test/', "*.npz"))
 
 data = []
 dataset_name = []
@@ -20,26 +44,7 @@ for file_path in file_list:
     dataset_name.append(file_path.split('/')[-1][:-4])
 
 
-best_params_results = {}
-
-
-def train_one(**hyper):
-    model = DEAN.DEAN(**hyper)
-    y_true,y_score = model.fit(x_train0, y_train, x_test0, y_test)
-
-    return roc_auc_score(y_true,y_score)
-
-def optimization(config: dict):
-
-    t0 = time.time()
-    auc = train_one(**config)
-    t1 = time.time()
-
-    return {'score': auc, 'evaluation_cost': t1-t0}
-
-
-
-
+standard_results = {}
 
 for i in range(len(data)):
     print('dataset ', i+1, 'out of ', len(data), '.......................')
@@ -54,34 +59,18 @@ for i in range(len(data)):
     
 
 
-    hyperparameters = {
-                    'bag': tune.randint(lower =2, upper= x_train0.shape[1]),
-                    'lr': tune.uniform(lower = 0.02, upper= 0.08),
-                    'depth': tune.randint(lower = 2, upper = 6),
-                    'batch': tune.randint(lower= 50, upper = 150),
-                    'rounds': tune.randint(lower= 10, upper = 150)
-                    }
 
-    analysis = tune.run(
-        optimization,  # the function to evaluate a config
-        config= hyperparameters,  # the search space defined
-        metric="score",
-        mode="max",  # the optimization mode, "min" or "max"
-        num_samples= 50
-        )
+    model = DEAN.DEAN(**avg_hyperparameters)
 
-    t = {}
+    y_true,y_score = model.fit(x_train0, y_train, x_test0, y_test)
 
-    t['auc_score'] = analysis.best_trial.last_result['score']
-    t['params'] = analysis.best_trial.last_result['config']
-    t['evaluation_cost'] = analysis.best_trial.last_result['evaluation_cost']
+    au = roc_auc_score(y_true,y_score)
 
-    best_params_results[dataset_name[i]] = t
+    standard_results[dataset_name[i]] = au
 
 
-    print('best parameters results for dataset: ', dataset_name[i])
-    print('auc_score: ', t['auc_score'])
-    print('with params: ', t['params'])
+    print('default parameters results for dataset: ', dataset_name[i])
+    print('auc_score: ', au)
 
     
 
@@ -90,8 +79,8 @@ for i in range(len(data)):
 
 print('saving..............................................')
 
-with open('../results/week5/best-parameters-results.json', 'w', encoding='utf-8') as f:
-    json.dump(best_params_results, f, ensure_ascii=False, indent=4)
+with open('../results/week5/avg-parameters-results.json', 'w', encoding='utf-8') as f:
+    json.dump(standard_results, f, ensure_ascii=False, indent=4)
     
     
 
