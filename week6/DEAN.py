@@ -1,3 +1,4 @@
+
 import sys
 
 import tensorflow.keras as keras
@@ -106,7 +107,7 @@ class DEAN():
             loss=mse(w,zero)
             loss=K.mean(loss)
             m.add_loss(loss)
-            m.compile(Adam(lr= self.lr))
+            m.compile(Adam(learning_rate= self.lr))
             return m
         
         l=[self.bag for i in range(self.depth)]
@@ -114,16 +115,15 @@ class DEAN():
         
         cb=[keras.callbacks.EarlyStopping(monitor='val_loss',patience=5,restore_best_weights=True),
                         keras.callbacks.TerminateOnNaN()]
-        cb.append(keras.callbacks.ModelCheckpoint(f"{pth}/model.tf", monitor='val_loss', verbose=1, save_best_only=True,save_weights_only=True))
+        cb.append(keras.callbacks.ModelCheckpoint(f"{pth}/model.tf", monitor='val_loss', verbose=0, save_best_only=True,save_weights_only=True))
         
-        m.summary()
         
         #train the model    
         h=m.fit(train,None,
                 epochs=500,
                 batch_size= self.batch,
                 validation_split=0.25,
-                verbose=1,
+                verbose=0,
                 callbacks=cb)
 
         #predict the output of our datasets 
@@ -170,10 +170,3 @@ class DEAN():
         y_score=np.sqrt(np.mean([(y_score/wid**pwr)**2 for y_score,wid in zip(y_scores,wids)],axis=0))
 
         return y_true,y_score
-
-
-
-    
-
-
-
