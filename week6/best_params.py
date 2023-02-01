@@ -6,31 +6,24 @@ import os
 import DEAN
 from loaddata import loaddata
 
+from data import  hyperparameters
 
 
-f = open('../results/week5/parameters-results.json')
-h = json.load(f)
-
-par = ['bag','lr', 'depth', 'batch', 'rounds']
-
-hy = {}
-
-for p in par:
-    hy[p] = []
-
-for k,v in h.items():
-    for p in par:
-        hy[p].append(v['params'][p])
+bag = hyperparameters['bag']
+lr = hyperparameters['lr']
+depth = hyperparameters['depth']
+batch = hyperparameters['batch']
+rounds = hyperparameters['round']
 
 
 
-avg_hyperparameters = {
-                    'bag': np.mean(hy['bag']),
-                    'lr': np.mean(hy['lr']),
-                    'depth': np.mean(hy['depth']),
-                    'batch': np.mean(hy['batch']),
-                    'rounds': np.mean(hy['rounds'])
-                    } #get average and median from _params.py
+avg_hyperparameters = {k: np.mean(v) for k,v in hyperparameters.items()} #get average and median from _params.py
+median_hyperparameters = {k: np.median(v) for k,v in hyperparameters.items()} #get average and median from _params.py
+
+tree_hyperparameters = {}
+
+
+
 
 
 
@@ -44,7 +37,8 @@ for file_path in file_list:
     dataset_name.append(file_path.split('/')[-1][:-4])
 
 
-standard_results = {}
+avg_params_results = {}
+median_params_results = {}
 
 for i in range(len(data)):
     print('dataset ', i+1, 'out of ', len(data), '.......................')
@@ -57,6 +51,9 @@ for i in range(len(data)):
         x_train0=np.reshape(x_train0,(x_train0.shape[0],np.prod(x_train0.shape[1:])))
         x_test0 =np.reshape(x_test0 ,(x_test0.shape[0],np.prod(x_test0.shape[1:])))
     
+    samples = x_test0.shape[0]
+    features = x_test0.shape[1]
+
 
 
 
@@ -66,7 +63,21 @@ for i in range(len(data)):
 
     au = roc_auc_score(y_true,y_score)
 
-    standard_results[dataset_name[i]] = au
+    avg_params_results[dataset_name[i]] = au
+
+
+    print('default parameters results for dataset: ', dataset_name[i])
+    print('auc_score: ', au)
+
+
+
+    model = DEAN.DEAN(**median_hyperparameters)
+
+    y_true,y_score = model.fit(x_train0, y_train, x_test0, y_test)
+
+    au = roc_auc_score(y_true,y_score)
+
+    median_params_results[dataset_name[i]] = au
 
 
     print('default parameters results for dataset: ', dataset_name[i])
@@ -80,8 +91,12 @@ for i in range(len(data)):
 print('saving..............................................')
 
 with open('../results/week5/avg-parameters-results.json', 'w', encoding='utf-8') as f:
-    json.dump(standard_results, f, ensure_ascii=False, indent=4)
+    json.dump(avg_params_results, f, ensure_ascii=False, indent=4)
     
     
 
 
+with open('../results/week5/median-parameters-results.json', 'w', encoding='utf-8') as f:
+    json.dump(median_params_results, f, ensure_ascii=False, indent=4)
+    
+    

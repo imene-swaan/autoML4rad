@@ -1,7 +1,7 @@
 import numpy as np
 
 def loaddata(dataset_name):
-    f=np.load('/global/datasets/test/' +  dataset_name + '.npz')
+    f=np.load('/global/datasets/' +  dataset_name + '.npz')
     x = f['x']
     a = (x.shape[0],) 
     y = np.zeros(a)
