@@ -7,24 +7,14 @@ import DEAN
 from loaddata import loaddata
 
 from data import  hyperparameters
+from joblib import load
 
 
-bag = hyperparameters['bag']
-lr = hyperparameters['lr']
-depth = hyperparameters['depth']
-batch = hyperparameters['batch']
-rounds = hyperparameters['round']
-
-
+par = ['bag','lr', 'depth', 'batch', 'rounds']
 
 avg_hyperparameters = {k: np.mean(v) for k,v in hyperparameters.items()} #get average and median from _params.py
 median_hyperparameters = {k: np.median(v) for k,v in hyperparameters.items()} #get average and median from _params.py
-
 tree_hyperparameters = {}
-
-
-
-
 
 
 file_list = glob.glob(os.path.join('/global/datasets/test/', "*.npz"))
@@ -39,6 +29,7 @@ for file_path in file_list:
 
 avg_params_results = {}
 median_params_results = {}
+tree_params_results = {}
 
 for i in range(len(data)):
     print('dataset ', i+1, 'out of ', len(data), '.......................')
@@ -53,34 +44,38 @@ for i in range(len(data)):
     
     samples = x_test0.shape[0]
     features = x_test0.shape[1]
+    inp=np.stack([samples,features],axis=1)
+
+
+    for p in par:
+        tree = load('trees/' + p + '_model.joblib')
+        tree_hyperparameters[p] = tree.predict(inp)
 
 
 
 
     model = DEAN.DEAN(**avg_hyperparameters)
-
     y_true,y_score = model.fit(x_train0, y_train, x_test0, y_test)
-
     au = roc_auc_score(y_true,y_score)
-
     avg_params_results[dataset_name[i]] = au
-
-
-    print('default parameters results for dataset: ', dataset_name[i])
+    print('average _parameters results for dataset: ', dataset_name[i])
     print('auc_score: ', au)
 
 
 
     model = DEAN.DEAN(**median_hyperparameters)
-
     y_true,y_score = model.fit(x_train0, y_train, x_test0, y_test)
-
     au = roc_auc_score(y_true,y_score)
-
     median_params_results[dataset_name[i]] = au
+    print('median _parameters results for dataset: ', dataset_name[i])
+    print('auc_score: ', au)
 
 
-    print('default parameters results for dataset: ', dataset_name[i])
+    model = DEAN.DEAN(**tree_hyperparameters)
+    y_true,y_score = model.fit(x_train0, y_train, x_test0, y_test)
+    au = roc_auc_score(y_true,y_score)
+    tree_params_results[dataset_name[i]] = au
+    print('tree _parameters results for dataset: ', dataset_name[i])
     print('auc_score: ', au)
 
     
@@ -93,10 +88,10 @@ print('saving..............................................')
 with open('../results/week5/avg-parameters-results.json', 'w', encoding='utf-8') as f:
     json.dump(avg_params_results, f, ensure_ascii=False, indent=4)
     
-    
-
 
 with open('../results/week5/median-parameters-results.json', 'w', encoding='utf-8') as f:
     json.dump(median_params_results, f, ensure_ascii=False, indent=4)
     
     
+with open('../results/week5/median-parameters-results.json', 'w', encoding='utf-8') as f:
+    json.dump(tree_params_results, f, ensure_ascii=False, indent=4)
