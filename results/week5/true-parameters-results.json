@@ -1,0 +1,122 @@
+{
+    "fashion0": {
+        "dataset": "fashion0",
+        "auc_score": 0.895276,
+        "params": {
+            "bag": 518,
+            "lr": 0.038218208779083065,
+            "depth": 2,
+            "batch": 70,
+            "rounds": 38
+        },
+        "evaluation_cost": 656.8911747932434
+    },
+    "har": {
+        "dataset": "har",
+        "auc_score": 0.9250497973121115,
+        "params": {
+            "bag": 191,
+            "lr": 0.039536934006924804,
+            "depth": 2,
+            "batch": 57,
+            "rounds": 34
+        },
+        "evaluation_cost": 700.0500061511993
+    },
+    "Liver_1": {
+        "dataset": "Liver_1",
+        "auc_score": 0.5640886965927528,
+        "params": {
+            "bag": 3,
+            "lr": 0.04020305851923013,
+            "depth": 2,
+            "batch": 50,
+            "rounds": 34
+        },
+        "evaluation_cost": 244.25111150741577
+    },
+    "pima": {
+        "dataset": "pima",
+        "auc_score": 0.6957777777777777,
+        "params": {
+            "bag": 3,
+            "lr": 0.044074593033722596,
+            "depth": 2,
+            "batch": 106,
+            "rounds": 41
+        },
+        "evaluation_cost": 469.7939808368683
+    },
+    "breastw": {
+        "dataset": "breastw",
+        "auc_score": 0.9819096613714738,
+        "params": {
+            "bag": 4,
+            "lr": 0.04178910225202137,
+            "depth": 2,
+            "batch": 76,
+            "rounds": 37
+        },
+        "evaluation_cost": 178.4323205947876
+    },
+    "cover": {
+        "dataset": "cover",
+        "auc_score": 0.9853211147773611,
+        "params": {
+            "bag": 3,
+            "lr": 0.039536934006924804,
+            "depth": 2,
+            "batch": 50,
+            "rounds": 34
+        },
+        "evaluation_cost": 9242.72863125801
+    },
+    "steel-plates-fault": {
+        "dataset": "steel-plates-fault",
+        "auc_score": 0.6233333333333333,
+        "params": {
+            "bag": 15,
+            "lr": 0.03941798243996576,
+            "depth": 2,
+            "batch": 50,
+            "rounds": 34
+        },
+        "evaluation_cost": 479.55263352394104
+    },
+    "optdigits": {
+        "dataset": "optdigits",
+        "auc_score": 0.6781777777777778,
+        "params": {
+            "bag": 36,
+            "lr": 0.03941798243996576,
+            "depth": 2,
+            "batch": 50,
+            "rounds": 34
+        },
+        "evaluation_cost": 282.91796875
+    },
+    "Diabetes_present": {
+        "dataset": "Diabetes_present",
+        "auc_score": 0.6892444444444444,
+        "params": {
+            "bag": 4,
+            "lr": 0.038632906360701394,
+            "depth": 2,
+            "batch": 70,
+            "rounds": 34
+        },
+        "evaluation_cost": 353.4690158367157
+    },
+    "wbc": {
+        "dataset": "wbc",
+        "auc_score": 0.9727891156462585,
+        "params": {
+            "bag": 10,
+            "lr": 0.04215948074966742,
+            "depth": 2,
+            "batch": 56,
+            "rounds": 41
+        },
+        "evaluation_cost": 370.92493200302124
+    }
+}
