@@ -1,0 +1,12 @@
+{
+    "dataset": "optdigits",
+    "auc_score": 0.6781777777777778,
+    "params": {
+        "bag": 36,
+        "lr": 0.03941798243996576,
+        "depth": 2,
+        "batch": 50,
+        "rounds": 34
+    },
+    "evaluation_cost": 282.91796875
+}

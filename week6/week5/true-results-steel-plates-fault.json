@@ -1,0 +1,12 @@
+{
+    "dataset": "steel-plates-fault",
+    "auc_score": 0.6233333333333333,
+    "params": {
+        "bag": 15,
+        "lr": 0.03941798243996576,
+        "depth": 2,
+        "batch": 50,
+        "rounds": 34
+    },
+    "evaluation_cost": 479.55263352394104
+}

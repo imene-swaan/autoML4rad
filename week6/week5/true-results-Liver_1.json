@@ -1,0 +1,12 @@
+{
+    "dataset": "Liver_1",
+    "auc_score": 0.5640886965927528,
+    "params": {
+        "bag": 3,
+        "lr": 0.04020305851923013,
+        "depth": 2,
+        "batch": 50,
+        "rounds": 34
+    },
+    "evaluation_cost": 244.25111150741577
+}

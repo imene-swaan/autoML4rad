@@ -1,0 +1,12 @@
+{
+    "dataset": "fashion0",
+    "auc_score": 0.895276,
+    "params": {
+        "bag": 518,
+        "lr": 0.038218208779083065,
+        "depth": 2,
+        "batch": 70,
+        "rounds": 38
+    },
+    "evaluation_cost": 656.8911747932434
+}

@@ -1,0 +1,12 @@
+{
+    "dataset": "wbc",
+    "auc_score": 0.9727891156462585,
+    "params": {
+        "bag": 10,
+        "lr": 0.04215948074966742,
+        "depth": 2,
+        "batch": 56,
+        "rounds": 41
+    },
+    "evaluation_cost": 370.92493200302124
+}

@@ -1,0 +1,11 @@
+{
+    "auc_score": 0.9888,
+    "params": {
+        "bag": 10,
+        "lr": 0.03547671046938141,
+        "depth": 2,
+        "batch": 76,
+        "rounds": 31
+    },
+    "evaluation_cost": 164.96852707862854
+}

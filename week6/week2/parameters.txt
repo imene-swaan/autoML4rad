@@ -1,0 +1,19 @@
+Parameters
+n_estimatorsint, default=200
+The number of base estimators in the ensemble.
+
+max_samplesint or float, optional (default=”auto”)
+The number of samples to draw from X to train each base estimator.
+
+If int, then draw max_samples samples.
+If float, then draw max_samples * X.shape[0]` samples.
+If “auto”, then max_samples=min(8, n_samples).
+contaminationfloat in (0., 0.5), optional (default=0.1)
+The amount of contamination of the data set, i.e. the proportion of outliers in the data set. Used when fitting to define the threshold on the decision function.
+
+random_stateint, RandomState instance or None, optional (default=None)
+If int, random_state is the seed used by the random number generator; If RandomState instance, random_state is the random number generator; If None, the random number generator is the RandomState instance used by np.random.
+
+https://pyod.readthedocs.io/en/latest/pyod.models.html#module-pyod.models.inne
+https://microsoft.github.io/FLAML/docs/Use-Cases/Tune-User-Defined-Function/#put-together
+https://scikit-learn.org/stable/modules/generated/sklearn.metrics.roc_auc_score.html
